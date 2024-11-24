@@ -249,3 +249,27 @@ exports.getAllListings = async (req, res) => {
       .json({ success: false, message: "Failed To Get All Listings" });
   }
 };
+
+exports.getOneListing = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const listing = await Listing.findById(id)
+      .populate("review")
+      .populate("owner", "userName");
+    if (!listing) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No Listing Available for this id" });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Successfully Fetched  Listing",
+      data: listing,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed To Get  Listings" });
+  }
+};

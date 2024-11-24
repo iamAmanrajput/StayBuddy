@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 // Route handling user-related requests
 app.use("/", require("./routes/User"));
 
-// Route handling listing-related requests
+// Route handling listing/review-related requests
 app.use("/listing", require("./routes/Listing"));
 
 // Start the server

@@ -17,6 +17,7 @@ const listingSchema = new mongoose.Schema({
     default:
       "https://media.istockphoto.com/id/1198320951/photo/sunset-at-the-beach.jpg?s=1024x1024&w=is&k=20&c=Fd34Xna7d7UWhzDVLwX7M6WTChOI0-6L6sRvM39iGXg=",
   },
+  imagePublicId: { type: String, required: true },
   price: {
     type: Number,
     required: true,
@@ -24,7 +25,7 @@ const listingSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ["Farm", "City", "BeachFront", "Mountain"],
+    enum: ["farm", "city", "beachFront", "mountain"],
   },
   country: {
     type: String,
@@ -39,6 +40,7 @@ const listingSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   review: [
     {

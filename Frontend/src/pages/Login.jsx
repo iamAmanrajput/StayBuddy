@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+// Your Login Component
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import eye icons from react-icons
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setToken, setCurrUser } from "../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,25 +25,49 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
     if (!formData.email || !formData.password) {
-      alert("Both fields are required!");
+      toast.error("Both fields are required!");
       return;
     }
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/login",
+        formData,
+        {
+          withCredentials: true, // Important: allows sending cookies
+        }
+      );
+      if (response.data.success) {
+        toast("Login Successfully", {
+          icon: "👏",
+          style: {
+            borderRadius: "10px",
+            background: "#1D232A",
+            color: "#D8A54D",
+          },
+        });
 
-    console.log(formData);
-    toast("login Successfully", {
-      icon: "👏",
-      style: {
-        borderRadius: "10px",
-        background: "#1D232A",
-        color: "#D8A54D",
-      },
-    });
-    setFormData({ email: "", password: "" });
+        // Adding values in localStorage and Redux
+        dispatch(setToken(response.data.token));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        dispatch(setCurrUser(response.data.user._id));
+        localStorage.setItem(
+          "currUser",
+          JSON.stringify(response.data.user._id)
+        );
+        navigate("/");
+      }
+
+      // Reset form after successful login
+      setFormData({ email: "", password: "" });
+    } catch (error) {
+      toast.error("Login failed. Please check your credentials.");
+      console.error(error);
+    }
   };
 
   const togglePasswordVisibility = () => {

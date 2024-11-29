@@ -5,9 +5,17 @@ const fileUpload = require("express-fileupload");
 
 const { dbConnect } = require("./config/database");
 const { cloudinaryConnect } = require("./config/cloudinary");
+const cors = require("cors");
 
 const app = express();
 
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"], // Adjust methods as needed
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 // Load environment variables
 dotenv.config();
 

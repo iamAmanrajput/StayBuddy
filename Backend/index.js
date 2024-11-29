@@ -40,11 +40,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Basic route for the home page
-app.get("/", (req, res) => {
-  res.send("This is a Home Root");
-});
-
 // Route handling user-related requests
 app.use("/", require("./routes/User"));
 

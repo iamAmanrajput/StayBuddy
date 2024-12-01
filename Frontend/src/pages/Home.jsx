@@ -14,34 +14,33 @@ function Home() {
   const dispatch = useDispatch();
   const { listings } = useSelector((state) => state.listing);
 
-  useEffect(() => {
-    // Fetch data only once if listings is empty
-    const getListingData = async () => {
-      try {
-        dispatch(setLoading(true));
-        const response = await axios.get("http://localhost:4000/listing", {
-          withCredentials: true,
-        });
-        if (response.data.success) {
-          // Dispatch the action to add listings to the Redux store
-          dispatch(addListings(response.data.data)); // Assuming data is an array
-        } else {
-          toast.error("No listings found");
-        }
-      } catch (error) {
-        toast.error("An error occurred");
-      } finally {
-        dispatch(setLoading(false));
+  const getListingData = async () => {
+    try {
+      dispatch(setLoading(true));
+      const response = await axios.get("http://localhost:4000/listing", {
+        withCredentials: true,
+      });
+      if (response.data.success) {
+        dispatch(addListings(response.data.data)); // Add data to Redux store
+      } else {
+        toast.error("No listings found");
       }
-    };
-
-    if (listings.length === 0) {
-      getListingData(); // Call API only if listings are empty
+    } catch (error) {
+      toast.error("An error occurred");
+    } finally {
+      dispatch(setLoading(false));
     }
-  }, [dispatch, listings.length]); // Dependency array to prevent redundant calls
+  };
+
+  useEffect(() => {
+    if (listings.length === 0) {
+      getListingData();
+    }
+  }, [listings]);
+
   return (
     <div className="w-full">
-      <div className="w-11/12 h-20 sm:h-12 mx-auto ">
+      <div className="w-11/12 h-20 sm:h-12 mx-auto">
         <ul className="flex justify-between items-center h-full font-bold text-2xl text-golden">
           <li className="no-underline opacity-60 hover:opacity-100">
             <Link className="flex flex-col md:flex-row items-center gap-1">
@@ -70,12 +69,15 @@ function Home() {
           </li>
         </ul>
       </div>
-      <div className="bg-gray-900 w-full">
-        <div className="w-11/12">
-          {/* Display listings */}
-          {listings.map((listing, index) => (
-            <Card key={index} listing={listing} />
-          ))}
+      <div className="bg-gray-900 w-full h-fit">
+        <div className="w-11/12 mx-auto md:flex pt-4 gap-8 md:flex-wrap ">
+          {/* Corrected nested map for listings */}
+          {listings.map((innerArray, index) =>
+            innerArray.map((listing) => {
+              console.log(listing);
+              return <Card key={listing._id} listingData={listing} />;
+            })
+          )}
         </div>
       </div>
     </div>

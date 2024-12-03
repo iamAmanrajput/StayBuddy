@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 function Footer() {
   return (
-    <div className="w-full mt-4">
+    <div className="w-full">
       <footer className="footer footer-center  text-base-content rounded p-10 bg-gray-900 border-t border-golden">
         <nav className="grid grid-flow-col gap-4">
           <Link to="/" className="link link-hover hover:text-golden">

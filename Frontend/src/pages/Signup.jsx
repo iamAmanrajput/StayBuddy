@@ -89,7 +89,7 @@ function Signup() {
   };
 
   return (
-    <div className="w-11/12 flex mx-auto mt-12 flex-col md:flex-row">
+    <div className="w-11/12 flex mx-auto mt-12 flex-col md:flex-row pb-4">
       <div className="w-full md:w-6/12">
         <img
           src="https://images.unsplash.com/photo-1516562618495-ad1ff1a273f9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRhcmslMjBob3VzZXxlbnwwfHwwfHx8MA%3D%3D"

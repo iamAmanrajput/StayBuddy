@@ -4,7 +4,11 @@ import { LiaRupeeSignSolid } from "react-icons/lia";
 function Card({ listingData }) {
   return (
     <div className="w-full md:w-[30%] mt-4 md:mt-0">
-      <img src={`${listingData.image}`} alt="" className="w-full rounded-xl" />
+      <img
+        src={`${listingData.image}`}
+        alt=""
+        className="w-full rounded-xl h-[300px]"
+      />
       <h1 className="font-bold text-2xl text-golden mt-2">
         {listingData.title}
       </h1>

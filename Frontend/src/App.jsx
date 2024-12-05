@@ -5,6 +5,10 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
+import Pagenotfound from "./pages/Pagenotfound";
+import Auth from "./routes/Auth";
+import NewListing from "./components/NewListing";
+import Spinner from "./components/Spinner";
 function App() {
   return (
     <>
@@ -14,6 +18,11 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/spinner" element={<Spinner />}></Route>
+          <Route path="/create-listing" element={<Auth />}>
+            <Route index element={<NewListing />}></Route>
+          </Route>
+          <Route path="*" element={<Pagenotfound />}></Route>
         </Routes>
         <Footer></Footer>
       </div>

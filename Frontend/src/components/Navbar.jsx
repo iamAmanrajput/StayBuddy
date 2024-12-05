@@ -82,7 +82,7 @@ function Navbar() {
             {/* Add Your Listing Button (now part of the hamburger menu on small screens) */}
             {token ? (
               <Link
-                to="/add-listing"
+                to="/create-listing"
                 className="border-2 px-4 py-1 rounded-2xl border-golden font-bold opacity-70 hover:opacity-100 text-golden flex items-center gap-2"
               >
                 <MdOutlineAddHomeWork className="text-xl font-bold" />

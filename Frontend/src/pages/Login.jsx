@@ -75,7 +75,7 @@ function Login() {
   };
 
   return (
-    <div className="w-11/12 flex mx-auto mt-12 flex-col md:flex-row">
+    <div className="w-11/12 flex mx-auto mt-12 flex-col md:flex-row pb-4">
       <div className="w-full md:w-6/12">
         <img
           src="https://images.unsplash.com/photo-1515937472778-f6acc7c30ba4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

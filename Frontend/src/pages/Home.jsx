@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import Loader from "../components/Loader"; // Import your loader component
 
 function Home() {
   const dispatch = useDispatch();
-  const { listings } = useSelector((state) => state.listing);
+  const { listings, loading } = useSelector((state) => state.listing); // Access `loading` state from Redux
 
-  // State to track the selected category
   const [selectedCategory, setSelectedCategory] = useState("Trending");
 
   const getListingData = async () => {
@@ -42,9 +42,8 @@ function Home() {
   }, [listings]);
 
   // Flatten the listings array if it's an array of arrays, and filter based on category
-  const flattenedListings = listings.flat(); // Flatten the listings if they are in nested arrays
+  const flattenedListings = listings.flat();
 
-  // Filter listings based on selected category
   const filteredListings = flattenedListings.filter((listing) => {
     if (selectedCategory === "Trending") {
       return true; // Show all listings for Trending
@@ -58,9 +57,7 @@ function Home() {
         <ul className="flex justify-between items-center h-full font-bold text-2xl text-golden">
           <li
             className={`no-underline opacity-60 hover:opacity-100 ${
-              selectedCategory === "Trending"
-                ? "opacity-100" // Keep opacity 100 for "Trending"
-                : ""
+              selectedCategory === "Trending" ? "opacity-100" : ""
             }`}
             onClick={() => setSelectedCategory("Trending")}
           >
@@ -118,15 +115,18 @@ function Home() {
 
       <div className="bg-gray-900 w-full pb-4 ">
         <div className="w-11/12 mx-auto md:flex pt-4 gap-8 md:flex-wrap">
-          {/* Map over the filtered listings */}
-          {filteredListings.length === 0 ? (
+          {loading ? ( // Show loader while loading
+            <div className="flex justify-center items-center w-full h-64">
+              <Loader /> {/* Replace with your loader component */}
+            </div>
+          ) : filteredListings.length === 0 ? (
             <p className="text-golden font-bold text-2xl text-center">
               No listings found for this category
             </p>
           ) : (
-            filteredListings.map((listing) => {
-              return <Card key={listing._id} listingData={listing} />;
-            })
+            filteredListings.map((listing) => (
+              <Card key={listing._id} listingData={listing} />
+            ))
           )}
         </div>
       </div>

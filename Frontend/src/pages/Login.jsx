@@ -34,13 +34,10 @@ function Login() {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:4000/login",
-        formData,
-        {
-          withCredentials: true, // Important: allows sending cookies
-        }
-      );
+      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await axios.post(`${apiUrl}/login`, formData, {
+        withCredentials: true, // Important: allows sending cookies
+      });
       if (response.data.success) {
         toast("Login Successfully", {
           icon: "👏",

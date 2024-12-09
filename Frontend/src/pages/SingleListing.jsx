@@ -13,7 +13,8 @@ function SingleListing() {
   const fetchListing = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:4000/listing/${id}`, {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await axios.get(`${apiUrl}/listing/${id}`, {
         withCredentials: true,
       });
 

@@ -44,13 +44,10 @@ function Signup() {
     setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/signup",
-        formData,
-        {
-          withCredentials: true, // Important: allows sending cookies
-        }
-      );
+      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await axios.post(`${apiUrl}/signup`, formData, {
+        withCredentials: true, // Important: allows sending cookies
+      });
 
       // If the response indicates success
       if (response.data.success) {

@@ -50,8 +50,9 @@ function NewListing() {
     });
 
     try {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(
-        "http://localhost:4000/listing/create",
+        `${apiUrl}/listing/create`,
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },

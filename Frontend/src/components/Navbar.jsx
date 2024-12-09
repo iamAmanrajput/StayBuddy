@@ -24,7 +24,8 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       // Make an API request to logout
-      const response = await axios.get("http://localhost:4000/logout", {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await axios.get(`${apiUrl}/logout`, {
         withCredentials: true, // Important for clearing cookies on the server side
       });
 

@@ -19,8 +19,9 @@ function Home() {
 
   const getListingData = async () => {
     try {
+      const apiUrl = process.env.REACT_APP_BACKEND_URL;
       dispatch(setLoading(true));
-      const response = await axios.get("http://localhost:4000/listing", {
+      const response = await axios.get(`${apiUrl}/listing`, {
         withCredentials: true,
       });
       if (response.data.success) {

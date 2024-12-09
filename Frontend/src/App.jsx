@@ -9,6 +9,7 @@ import Pagenotfound from "./pages/Pagenotfound";
 import Auth from "./routes/Auth";
 import NewListing from "./components/NewListing";
 import Spinner from "./components/Spinner";
+import SingleListing from "./pages/SingleListing";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/listing/:id" element={<SingleListing />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/spinner" element={<Spinner />}></Route>

@@ -10,7 +10,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://staybuddy.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"], // Adjust methods as needed
   credentials: true,
 };

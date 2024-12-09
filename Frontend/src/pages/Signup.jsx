@@ -44,7 +44,7 @@ function Signup() {
     setError("");
 
     try {
-      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await axios.post(`${apiUrl}/signup`, formData, {
         withCredentials: true, // Important: allows sending cookies
       });

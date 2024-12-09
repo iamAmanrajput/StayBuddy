@@ -34,7 +34,7 @@ function Login() {
       return;
     }
     try {
-      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       const response = await axios.post(`${apiUrl}/login`, formData, {
         withCredentials: true, // Important: allows sending cookies
       });

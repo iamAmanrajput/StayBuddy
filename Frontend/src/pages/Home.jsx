@@ -19,7 +19,7 @@ function Home() {
 
   const getListingData = async () => {
     try {
-      const apiUrl = process.env.REACT_APP_BACKEND_URL;
+      const apiUrl = import.meta.env.VITE_BACKEND_URL;
       dispatch(setLoading(true));
       const response = await axios.get(`${apiUrl}/listing`, {
         withCredentials: true,
